@@ -5,30 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="mise &amp; register はレジまわりの作業代行です。電話・訪問なし、メッセージだけで進めます。">
   <title>mise &amp; register レジまわりの作業代行</title>
+  <!-- 文字の形（Google Fonts）：本文は Zen Kaku Gothic New、英字の見出しは Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- ページの最初：サービス名とひとこと説明 -->
   <header>
-    <h1>mise &amp; register レジまわりの作業代行</h1>
-    <p>電話・訪問なし、メッセージだけで進めます</p>
-    <nav aria-label="ページ内の案内">
-      <ul>
-        <li><a href="#services">サービスの一覧</a></li>
-        <li><a href="#flow">頼むときの流れ</a></li>
-        <li><a href="#faq">よくある質問</a></li>
-        <li><a href="#estimate">見積もり相談</a></li>
-      </ul>
-    </nav>
+    <div class="header-bar">
+      <p class="logo">mise <span>&amp;</span> register</p>
+      <nav aria-label="ページ内の案内">
+        <ul>
+          <li><a href="#services">サービス</a></li>
+          <li><a href="#flow">流れ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#estimate">見積もり相談</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="hero">
+      <p class="hero-label">お店のレジまわりの作業代行</p>
+      <h1>レジの「めんどう」を、<br>まるごとおまかせ。</h1>
+      <p>商品の登録データ、売上の集計、スタッフ向けのマニュアルまで。<br>電話・訪問なし、メッセージだけで進めます。</p>
+      <a class="hero-button" href="#estimate">無料で見積もりを相談する</a>
+    </div>
   </header>
 
   <main>
-    <figure>
-      <img src="https://placehold.co/1200x500?text=mise+%26+register" alt="mise &amp; register のイメージ画像" width="1200" height="500">
-    </figure>
-
-    <!-- サービスの一覧（名前・料金の目安・日数） -->
+    <!-- サービスの一覧（見本・名前・料金の目安・日数）。見本の画像を押すと大きく表示する：script.js -->
     <section id="services">
       <h2>サービスの一覧</h2>
+      <p class="section-lead">見本は架空のお店のテストデータで作っています。画像を押すと大きく見られます。</p>
       <table>
         <caption>作業代行のサービスと料金の目安</caption>
         <thead>
@@ -36,6 +45,7 @@
             <th scope="col">サービス</th>
             <th scope="col">料金の目安</th>
             <th scope="col">日数</th>
+            <th scope="col">見本</th>
           </tr>
         </thead>
         <tbody>
@@ -43,40 +53,82 @@
             <th scope="row">商品マスタの登録データづくり</th>
             <td>3,000円〜</td>
             <td>3日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-master.webp" data-caption="商品マスタの登録データ（CSV）と確認リスト">
+                <img src="images/sample-master.webp" alt="商品マスタの登録データの見本。商品コード・商品名・カテゴリ・税込価格・税率の表と、取り込み後の確認リスト" width="1200" height="1220" loading="lazy">
+              </button>
+            </td>
           </tr>
           <tr>
             <th scope="row">売上集計の Excel シート</th>
             <td>10,000円〜</td>
             <td>7日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-sales-1.webp" data-caption="売上集計の Excel シート（今月と前月の比較）">
+                <img src="images/sample-sales-1.webp" alt="売上集計シートの見本。売上・客数・客単価を今月と前月で比べる表と、日別の売上のグラフ" width="1200" height="1200" loading="lazy">
+              </button>
+            </td>
           </tr>
           <tr>
             <th scope="row">スタッフ向けレジ操作マニュアル</th>
             <td>10,000円〜</td>
             <td>5日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-manual.webp" data-caption="スタッフ向けレジ操作マニュアル（会計する・現金）">
+                <img src="images/sample-manual.webp" alt="レジ操作マニュアルの見本。架空のレジ画面に番号の丸を付け、番号ごとに操作を説明している" width="1200" height="1500" loading="lazy">
+              </button>
+            </td>
           </tr>
           <tr>
             <th scope="row">POSレジの初期設定セット</th>
             <td>25,000円〜</td>
             <td>7日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-pos-setup.png" data-caption="POSレジの初期設定セット（設定値の一覧表とレシートの確認）">
+                <img src="images/sample-pos-setup.png" alt="POSレジの初期設定セットの見本。店舗情報・登録番号・税率などの設定値の一覧表と、レシートで確かめる4か所、試しの会計3通り" width="1200" height="1220" loading="lazy">
+              </button>
+            </td>
           </tr>
           <tr>
             <th scope="row">メニュー表とPOSの商品ボタンをそろえるセット</th>
             <td>10,000円〜</td>
             <td>7日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-menu-1.webp" data-caption="メニュー表とレジの商品ボタンをそろえる">
+                <img src="images/sample-menu-1.webp" alt="メニュー表の見本と、同じ並びにしたレジのボタン、メニュー名とボタン名の対応表" width="1200" height="1220" loading="lazy">
+              </button>
+            </td>
           </tr>
           <tr>
             <th scope="row">お店紹介のホームページ（1ページ）</th>
             <td>20,000円〜</td>
             <td>10日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-website.webp" data-caption="お店紹介のホームページ（1ページ）">
+                <img src="images/sample-website.webp" alt="お店紹介のホームページの見本。スマホの画面3つで、お店の紹介・営業時間とメニュー・写真とアクセスを並べている" width="1200" height="1220" loading="lazy">
+              </button>
+            </td>
           </tr>
           <tr>
             <th scope="row">ネットショップの初期設定セット（Shopify）</th>
             <td>25,000円〜</td>
             <td>10日前後</td>
+            <td class="sample-cell">
+              <button type="button" class="sample-open" data-src="images/sample-shop-setup.png" data-caption="ネットショップの初期設定セット（Shopify）">
+                <img src="images/sample-shop-setup.png" alt="ネットショップの初期設定セットの見本。ストアの詳細・税金・配送・ポリシーの設定値の一覧表、商品CSV、特定商取引法に基づく表記の主な項目、公開前のチェックリスト" width="1200" height="1220" loading="lazy">
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
-      <p><small>料金・日数は目安です。内容に合わせてお見積もりします。</small></p>
+      <p class="note"><small>料金・日数は目安です。内容に合わせてお見積もりします。</small></p>
+
+      <!-- 見本を大きく表示する窓 -->
+      <dialog id="sample-dialog" aria-label="見本の拡大表示">
+        <button type="button" class="dialog-close" aria-label="閉じる">×</button>
+        <img id="sample-dialog-image" src="" alt="">
+        <p id="sample-dialog-caption"></p>
+      </dialog>
     </section>
 
     <!-- 頼むときの流れ -->
@@ -117,11 +169,11 @@
       </dl>
     </section>
 
-    <!-- 見積もり相談フォーム（JavaScript なし。送信するとメールソフトが開きます） -->
+    <!-- 見積もり相談フォーム（デモ。送信はせず、script.js がページ内にメッセージを出す） -->
     <section id="estimate">
       <h2>見積もり相談</h2>
-      <p>送信ボタンを押すと、お使いのメールソフトが開きます。</p>
-      <form action="mailto:taro.samurai@example.com" method="post" enctype="text/plain">
+      <p class="section-lead">このページはデモのため、入力した内容はどこにも送信されません。</p>
+      <form id="estimate-form" novalidate>
         <p>
           <label for="shop-name">店名</label><br>
           <input type="text" id="shop-name" name="店名" autocomplete="organization" required>
@@ -137,6 +189,7 @@
         <p>
           <button type="submit">見積もりを相談する</button>
         </p>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
     </section>
   </main>
@@ -148,5 +201,7 @@
     </address>
     <p><small>&copy; mise &amp; register</small></p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
