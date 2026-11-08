@@ -9,17 +9,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- ページの最初：サービス名とひとこと説明 -->
   <header>
     <div class="header-bar">
-      <p class="logo">mise <span>&amp;</span> register</p>
+      <p class="logo"><img src="logo.svg" alt="" width="40" height="40"><span>mise <span class="amp">&amp;</span> register</span></p>
       <nav aria-label="ページ内の案内">
         <ul>
           <li><a href="#services">サービス</a></li>
           <li><a href="#flow">流れ</a></li>
+          <li><a href="#startup">開業準備</a></li>
+          <li><a href="#about">運営者</a></li>
           <li><a href="#faq">よくある質問</a></li>
           <li><a href="#estimate">見積もり相談</a></li>
         </ul>
@@ -154,6 +157,57 @@
       </ol>
     </section>
 
+    <!-- これから開業する方へ：チェックすると進み具合が伸びる（script.js） -->
+    <section id="startup">
+      <h2>これから開業する方へ</h2>
+      <p class="section-lead">レジまわりの開業準備、どこまで進みましたか？ 終わったものにチェックを入れてみてください。</p>
+      <div class="startup-box">
+        <div class="progress-head">
+          <span id="progress-count">0 / 6</span>
+          <span id="progress-message">まずは 1 つ目から始めましょう</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="開業準備の進み具合" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <ul class="startup-list">
+          <li><label><input type="checkbox" class="startup-check">メニューと価格（税込）を決めた</label><span class="hint">→ メニュー表とPOSの商品ボタン</span></li>
+          <li><label><input type="checkbox" class="startup-check">使うレジ（POS）を決めた</label><span class="hint">→ POSレジの初期設定セット</span></li>
+          <li><label><input type="checkbox" class="startup-check">支払い方法（現金・カード・QR）を決めた</label><span class="hint">→ POSレジの初期設定セット</span></li>
+          <li><label><input type="checkbox" class="startup-check">商品をレジに登録した</label><span class="hint">→ 商品マスタの登録データづくり</span></li>
+          <li><label><input type="checkbox" class="startup-check">スタッフがレジの練習をした</label><span class="hint">→ スタッフ向けレジ操作マニュアル</span></li>
+          <li><label><input type="checkbox" class="startup-check">お店の紹介ページかネットショップを用意した</label><span class="hint">→ ホームページ・ネットショップ</span></li>
+        </ul>
+        <p class="startup-cta">残りの準備は、作業代行でお手伝いできます。<a href="#estimate">見積もり相談へ</a></p>
+      </div>
+    </section>
+
+    <!-- 運営者の紹介 -->
+    <section id="about">
+      <h2>運営者の紹介</h2>
+      <div class="about-card">
+        <div class="about-avatar" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="#e7f0f1"/><circle cx="32" cy="25" r="11" fill="#2c5f6e"/><path d="M12 56c3-11 11-16 20-16s17 5 20 16" fill="#2c5f6e"/></svg>
+        </div>
+        <div>
+          <p class="about-name">侍 太郎 <small>（見本の名前です）</small></p>
+          <p>お店のレジや周辺機器のサポートをしてきました。「レジの設定がよく分からない」「マニュアルを作る時間がない」というお店の、裏方の作業を引き受けます。</p>
+          <ul class="about-tags">
+            <li>POSレジ・周辺機器の検証</li>
+            <li>ネットワークの検証</li>
+            <li>ヘルプデスク</li>
+            <li>AWS 認定ソリューションアーキテクト – アソシエイト</li>
+            <li>LPIC-1</li>
+          </ul>
+          <h3>大切にしていること</h3>
+          <ul class="about-promise">
+            <li>ログイン情報はお預かりしません</li>
+            <li>お支払いは見本を確認していただいてから</li>
+            <li>お預かりしたデータは納品から30日で削除します</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- よくある質問 -->
     <section id="faq">
       <h2>よくある質問</h2>
@@ -174,21 +228,67 @@
       <h2>見積もり相談</h2>
       <p class="section-lead">このページはデモのため、入力した内容はどこにも送信されません。</p>
       <form id="estimate-form" novalidate>
-        <p>
-          <label for="shop-name">店名</label><br>
-          <input type="text" id="shop-name" name="店名" autocomplete="organization" required>
-        </p>
-        <p>
-          <label for="email">メールアドレス</label><br>
-          <input type="email" id="email" name="メールアドレス" autocomplete="email" required>
-        </p>
-        <p>
-          <label for="message">相談内容</label><br>
-          <textarea id="message" name="相談内容" rows="6" cols="40" required></textarea>
-        </p>
-        <p>
-          <button type="submit">見積もりを相談する</button>
-        </p>
+        <!-- いまどのステップかを表示する -->
+        <ol class="stepper" aria-label="申し込みのステップ">
+          <li class="is-current">サービス</li>
+          <li>入力</li>
+          <li>確認</li>
+          <li>完了</li>
+        </ol>
+
+        <!-- ステップ1：サービスを選ぶ -->
+        <fieldset class="form-step" data-step="1">
+          <legend>1. 相談したいサービスを選んでください（いくつでも）</legend>
+          <ul class="service-choices">
+            <li><label><input type="checkbox" name="service" value="商品マスタの登録データづくり" data-price="3000">商品マスタの登録データづくり<span>3,000円〜</span></label></li>
+            <li><label><input type="checkbox" name="service" value="売上集計の Excel シート" data-price="10000">売上集計の Excel シート<span>10,000円〜</span></label></li>
+            <li><label><input type="checkbox" name="service" value="スタッフ向けレジ操作マニュアル" data-price="10000">スタッフ向けレジ操作マニュアル<span>10,000円〜</span></label></li>
+            <li><label><input type="checkbox" name="service" value="POSレジの初期設定セット" data-price="25000">POSレジの初期設定セット<span>25,000円〜</span></label></li>
+            <li><label><input type="checkbox" name="service" value="メニュー表とPOSの商品ボタンをそろえるセット" data-price="10000">メニュー表とPOSの商品ボタン<span>10,000円〜</span></label></li>
+            <li><label><input type="checkbox" name="service" value="お店紹介のホームページ（1ページ）" data-price="20000">お店紹介のホームページ<span>20,000円〜</span></label></li>
+            <li><label><input type="checkbox" name="service" value="ネットショップの初期設定セット（Shopify）" data-price="25000">ネットショップの初期設定セット<span>25,000円〜</span></label></li>
+          </ul>
+          <p class="step-buttons"><button type="button" class="next-step">次へ</button></p>
+        </fieldset>
+
+        <!-- ステップ2：お店の情報を入力する -->
+        <fieldset class="form-step" data-step="2" hidden>
+          <legend>2. お店の情報を入力してください</legend>
+          <p>
+            <label for="shop-name">店名</label><br>
+            <input type="text" id="shop-name" name="店名" autocomplete="organization" required>
+          </p>
+          <p>
+            <label for="email">メールアドレス</label><br>
+            <input type="email" id="email" name="メールアドレス" autocomplete="email" required>
+          </p>
+          <p>
+            <label for="message">相談内容（任意）</label><br>
+            <textarea id="message" name="相談内容" rows="5" cols="40"></textarea>
+          </p>
+          <p class="step-buttons"><button type="button" class="prev-step">戻る</button><button type="button" class="next-step">確認へ</button></p>
+        </fieldset>
+
+        <!-- ステップ3：確認 -->
+        <fieldset class="form-step" data-step="3" hidden>
+          <legend>3. 内容を確認してください</legend>
+          <dl class="confirm-list">
+            <dt>サービス</dt><dd id="confirm-services"></dd>
+            <dt>料金の目安（合計）</dt><dd id="confirm-total"></dd>
+            <dt>店名</dt><dd id="confirm-shop"></dd>
+            <dt>メールアドレス</dt><dd id="confirm-email"></dd>
+            <dt>相談内容</dt><dd id="confirm-message"></dd>
+          </dl>
+          <p class="step-buttons"><button type="button" class="prev-step">戻る</button><button type="submit">この内容で相談する</button></p>
+        </fieldset>
+
+        <!-- ステップ4：完了 -->
+        <div class="form-step form-done" data-step="4" hidden>
+          <p class="done-mark" aria-hidden="true">✓</p>
+          <p id="done-text"></p>
+          <p class="step-buttons"><button type="button" id="restart">最初からやり直す</button></p>
+        </div>
+
         <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
     </section>

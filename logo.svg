@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="mise &amp; register のロゴ">
+  <!-- 店先（mise）のひさしと、レジ（register）を組み合わせたマーク -->
+  <rect x="2" y="2" width="44" height="44" rx="12" fill="#2c5f6e"/>
+  <path d="M10 13h28v7a3.5 3.5 0 0 1-7 0a3.5 3.5 0 0 1-7 0a3.5 3.5 0 0 1-7 0a3.5 3.5 0 0 1-7 0z" fill="#e9805a"/>
+  <rect x="13" y="26" width="22" height="13" rx="3" fill="#fff"/>
+  <rect x="17" y="30" width="14" height="2.2" rx="1.1" fill="#2c5f6e"/>
+  <rect x="17" y="34" width="8" height="2.2" rx="1.1" fill="#e9805a"/>
+</svg>

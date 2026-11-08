@@ -98,6 +98,9 @@ header {
 
 .logo {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: "Outfit", sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
@@ -105,7 +108,7 @@ header {
   letter-spacing: 0.02em;
 }
 
-.logo span {
+.logo .amp {
   color: var(--accent);
 }
 
@@ -498,7 +501,7 @@ main > section:first-child {
   font-weight: 700;
 }
 
-#estimate input,
+#estimate input:not([type="checkbox"]),
 #estimate textarea {
   width: 100%;
   font: inherit;
@@ -521,9 +524,194 @@ main > section:first-child {
   background: #fff6f5;
 }
 
-/* 送信ボタンは真ん中に置く */
-#estimate form p:has(button) {
+/* ステップの表示（サービス → 入力 → 確認 → 完了） */
+.stepper {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  counter-reset: stepper;
+}
+
+.stepper li {
+  counter-increment: stepper;
   text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  position: relative;
+}
+
+/* 番号の丸 */
+.stepper li::before {
+  content: counter(stepper);
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto 0.3rem;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--muted);
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  line-height: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* 丸と丸をつなぐ線 */
+.stepper li + li::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 50%;
+  width: 100%;
+  height: 3px;
+  background: var(--line);
+}
+
+.stepper li.is-current,
+.stepper li.is-done {
+  color: var(--main-dark);
+  font-weight: 700;
+}
+
+.stepper li.is-current::before {
+  background: var(--accent);
+  color: #fff;
+}
+
+.stepper li.is-done::before {
+  content: "✓";
+  background: var(--main);
+  color: #fff;
+}
+
+.stepper li.is-done::after,
+.stepper li.is-current::after {
+  background: var(--main);
+}
+
+.form-step {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form-step legend {
+  font-weight: 700;
+  color: var(--main-dark);
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+/* サービスを選ぶチェック */
+.service-choices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.service-choices label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--base);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.service-choices label:has(input:checked) {
+  border-color: var(--main);
+  background: var(--main-light);
+}
+
+.service-choices span {
+  margin-left: auto;
+  color: var(--accent-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.service-choices input,
+.startup-list input {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--main);
+  flex: none;
+}
+
+/* 確認の一覧 */
+.confirm-list {
+  margin: 0 0 1rem;
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  border-top: 1px solid var(--line);
+}
+
+.confirm-list dt,
+.confirm-list dd {
+  margin: 0;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.confirm-list dt {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.confirm-list dd {
+  font-weight: 700;
+}
+
+/* 完了 */
+.form-done {
+  text-align: center;
+}
+
+.done-mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 0.8rem;
+  border-radius: 50%;
+  background: var(--main);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 3.5rem;
+}
+
+#done-text {
+  font-weight: 700;
+  color: var(--main-dark);
+}
+
+/* 「戻る」「次へ」のボタンを並べる */
+.step-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+#estimate button.prev-step,
+#estimate button#restart {
+  background: var(--surface);
+  color: var(--main-dark);
+  border: 2px solid var(--line);
+  box-shadow: none;
+}
+
+#estimate button.prev-step:hover,
+#estimate button#restart:hover {
+  background: var(--main-light);
 }
 
 #estimate button {
@@ -564,6 +752,157 @@ main > section:first-child {
   background: var(--main-light);
   border-radius: 10px;
   padding: 0.8rem 1rem;
+}
+
+/* ---- これから開業する方へ（チェックリスト） ---- */
+.startup-box {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-weight: 700;
+  color: var(--main-dark);
+}
+
+#progress-count {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.3rem;
+  color: var(--accent-dark);
+}
+
+.progress-track {
+  height: 12px;
+  margin: 0.5rem 0 1.25rem;
+  border-radius: 999px;
+  background: var(--main-light);
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--main), #4f8a9a);
+  transition: width 0.4s ease;
+}
+
+.progress-bar.is-complete {
+  background: linear-gradient(90deg, var(--accent), #f2a47f);
+}
+
+.startup-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.startup-list li {
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.startup-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.startup-list label:has(input:checked) {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.startup-list .hint {
+  display: block;
+  margin-left: 1.9rem;
+  font-size: 0.82rem;
+  color: var(--main);
+}
+
+.startup-cta {
+  margin: 1.25rem 0 0;
+  text-align: center;
+}
+
+.startup-cta a {
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+/* ---- 運営者の紹介 ---- */
+.about-card {
+  max-width: 820px;
+  margin: 2rem auto 0;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 2rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.about-avatar svg {
+  width: 140px;
+  height: 140px;
+  display: block;
+}
+
+.about-name {
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--main-dark);
+}
+
+.about-name small {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.about-tags {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-tags li {
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  background: var(--main-light);
+  color: var(--main-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.about-card h3 {
+  margin: 1rem 0 0.3rem;
+  font-size: 1rem;
+  color: var(--main-dark);
+}
+
+.about-promise {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.about-promise li::marker {
+  color: var(--accent);
 }
 
 /* ---- フッター ---- */
@@ -618,11 +957,52 @@ footer a {
     margin-top: 3.5rem;
   }
 
-  #estimate form {
+  #estimate form,
+  .startup-box,
+  .about-card {
     padding: 1.25rem;
   }
 
-  #estimate button,
+  /* 運営者の紹介：写真を上、文を下に */
+  .about-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .about-avatar svg {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .about-tags {
+    justify-content: center;
+  }
+
+  .about-promise {
+    text-align: left;
+  }
+
+  .confirm-list {
+    grid-template-columns: 1fr;
+  }
+
+  .confirm-list dt {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .service-choices label {
+    flex-wrap: wrap;
+  }
+
+  .step-buttons button {
+    flex: 1;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .hero-button {
     width: 100%;
   }
